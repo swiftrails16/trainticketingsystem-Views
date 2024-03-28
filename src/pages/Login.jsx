@@ -57,7 +57,11 @@ const Login = () => {
             </CardContent>
             <CardFooter className="flex flex-col justify-between">
               <div className="flex w-full justify-between">
-                <Button className="w-full lg:w-1/2 rounded-3xl">Log in</Button>
+                <Link className="w-[70%]" to={"/search"}>
+                  <Button className="w-full lg:w-1/2 rounded-3xl">
+                    Log in
+                  </Button>
+                </Link>
                 <h5 className="scroll-m-20 text-sm font-normal underline tracking-tight self-center">
                   Forgot your password?
                 </h5>

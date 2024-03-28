@@ -1,0 +1,41 @@
+{
+  "trains": {
+    "trains_available": [
+      {
+        "from_to": "Station A to Station B"
+      },
+      {
+        "from_to": "Station C to Station D"
+      },
+      {
+        "from_to": "Station E to Station F"
+      }
+    ],
+    "train_schedules": [
+      {
+        "train_number": 1234,
+        "train_name": "Express",
+        "from_station": "Station A",
+        "to_station": "Station B",
+        "available_seats": 200,
+        "fare": 50.0
+      },
+      {
+        "train_number": 5678,
+        "train_name": "Local",
+        "from_station": "Station C",
+        "to_station": "Station D",
+        "available_seats": 150,
+        "fare": 30.0
+      },
+      {
+        "train_number": 9012,
+        "train_name": "Superfast",
+        "from_station": "Station E",
+        "to_station": "Station F",
+        "available_seats": 100,
+        "fare": 80.0
+      }
+    ]
+  }
+}

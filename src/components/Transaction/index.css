@@ -1,0 +1,114 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+}
+
+.payment-container {
+  max-width: 600px;
+  background: #fff;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+ position: relative;
+ top: 30%;
+
+  border:2px solid black;
+
+
+}
+
+.payment-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.payment-buttons button {
+  flex: 1; /* Make the buttons take up equal space */
+  padding: 10px;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.apple-pay {
+  background-color: black;
+  color: white;
+  margin-right: 10px; /* Add space between the buttons */
+}
+
+.google-pay {
+  background-color: #5d9ff0;
+  color: white;
+  margin-left: 10px; /* Add space between the buttons */
+}
+
+.payment-buttons button:hover {
+  opacity: 0.9;
+}
+
+.payment-buttons button:focus {
+  outline: none;
+}
+
+.alternative-payment p {
+  text-align: center;
+  color: #888;
+  margin: 20px 0;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-top: 10px;
+}
+
+form input[type="email"],
+form input[type="text"],
+form select,
+form button {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.card-information {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.card-information legend {
+  padding: 0 5px;
+  font-size: 14px;
+}
+
+
+
+form .submitButton{
+  background-color: black;
+  color : #fff;
+}
+
+form button:hover {
+  opacity: 0.7;
+}
+
+form button:focus {
+  outline: none;
+}

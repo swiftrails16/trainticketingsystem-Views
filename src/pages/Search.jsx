@@ -12,11 +12,12 @@ import {
 const Search = () => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [date, setDate] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/search-result/${from}/${to}`);
+    navigate(`/search-result/${from}/${to}/${date}`);
   };
 
   return (
@@ -70,6 +71,7 @@ const Search = () => {
                       id="date"
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-500"
                       type="date"
+                      onChange={(e) => setDate(e.target.value)}
                     />
                   </div>
                   <div className="flex flex-col space-y-1.5 w-[50%]">

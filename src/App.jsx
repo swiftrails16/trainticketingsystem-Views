@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import SearchResult from "./pages/SearchResult";
+import TrainDetails from "./pages/TrainDetails";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
     element: <Search />,
   },
   {
-    path: "/search-result/:from/:to",
+    path: "/search-result/:from/:to/:date",
     element: <SearchResult />,
+  },
+  {
+    path: "/booking/:trainNum",
+    element: <TrainDetails />,
   },
 ]);
 

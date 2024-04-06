@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { IMAGES } from "@/assets/imgs/Images";
 import {
   Card,
@@ -10,75 +10,53 @@ import {
 } from "@/components/ui/card";
 import TrainCard from "@/components/TrainCard/TrainCard";
 
+// import trainData from "../assets/data/train_data.json";
+
 const SearchResult = () => {
-  const { from, to } = useParams();
+  const { from, to, date } = useParams();
+  const navigate = useNavigate();
   const [filteredTrains, setFilteredTrains] = useState([]);
+  const [trainsData, setTrainsData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = {
-          trains: {
-            trains_available: [
-              {
-                from_to: "Station A to Station B",
-              },
-              {
-                from_to: "Station C to Station D",
-              },
-              {
-                from_to: "Station E to Station F",
-              },
-            ],
-            train_schedules: [
-              {
-                train_number: 1234,
-                train_name: "Express",
-                from_station: "Station A",
-                to_station: "Station B",
-                available_seats: 200,
-                fare: 50.0,
-              },
-              {
-                train_number: 5678,
-                train_name: "Local",
-                from_station: "Station A",
-                to_station: "Station B",
-                available_seats: 150,
-                fare: 30.0,
-              },
-              {
-                train_number: 9012,
-                train_name: "Superfast",
-                from_station: "Station E",
-                to_station: "Station F",
-                available_seats: 100,
-                fare: 80.0,
-              },
-            ],
-          },
-        };
+        const response = await fetch(
+          `http://localhost:8080/stationCodes?fromStationCode=${from}&toStationCode=${to}&dateOfJourney=${date}`
+        );
+        if (!response.ok) throw new Error("Failed to fetch data");
+        const responseData = await response.text();
+        // Parse text into JSON
+        const trains = JSON.parse(responseData);
+        console.log(trains);
+        // const filtered = filterTrains(trainsData.data, from, to, date);
+        // setFilteredTrains(filtered);
 
-        const filtered = filterTrains(data, from, to);
-        setFilteredTrains(filtered);
+        setTrainsData(trains.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [from, to]);
+  }, [from, to, date]);
 
-  const filterTrains = (data, fromStation, toStation) => {
-    const { train_schedules } = data.trains;
+  // const filterTrains = (data, fromStation, toStation, date) => {
+  //   const filteredTrains = data.filter((train) => {
+  //     const convertedDate = train.train_date.split("-").reverse().join("-");
+  //     const trainDate = new Date(convertedDate);
+  //     const userDate = new Date(date);
+  //     return (
+  //       train.train_src === fromStation &&
+  //       train.train_dstn === toStation &&
+  //       trainDate.getDate() === userDate.getDate()
+  //     );
+  //   });
+  //   return filteredTrains;
+  // };
 
-    const filteredTrains = train_schedules.filter((train) => {
-      return (
-        train.from_station === fromStation && train.to_station === toStation
-      );
-    });
-
-    return filteredTrains;
+  const handleClick = (train) => {
+    navigate(`/booking/${train.train_number}`, { state: { train, from, to, date } });
   };
 
   return (
@@ -109,10 +87,12 @@ const SearchResult = () => {
           </CardHeader>
 
           <CardContent>
-            {filteredTrains.length > 0 ? (
+            {trainsData.length > 0 ? (
               <div className="flex flex-col gap-5">
-                {filteredTrains.map((train, index) => (
-                  <TrainCard key={index} train={train} />
+                {trainsData.map((train, index) => (
+                  <div key={index} onClick={() => handleClick(train)}>
+                    <TrainCard train={train} />
+                  </div>
                 ))}
               </div>
             ) : (

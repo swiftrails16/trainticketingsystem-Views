@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <TrainDetails />,
   },
   {
-    path: "/Payment",
+    path: "/Payment/:ticketPrice",
     element: <Paymentapi />,
   },
 ]);

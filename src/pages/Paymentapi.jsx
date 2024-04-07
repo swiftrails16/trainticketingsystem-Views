@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react'
-import Loader from 'react-loader-spinner'
 import Payment from './Payment'
+import { useParams } from 'react-router-dom'
 
-const Apiurl = 'http://localhost:8080/taxation?price=100'
+
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -11,6 +11,7 @@ const apiStatusConstants = {
   failure: 'FAILURE',
 }
 const Paymentapi = () => {
+  const {ticketPrice}=useParams()
   const [apiDetails, setApiDetails] = useState({
     apiStatus: apiStatusConstants.initial,
     responseData: null,
@@ -23,21 +24,20 @@ const Paymentapi = () => {
         responseData: null,
         errorMsg: null,
       })
-    
-      const response = await fetch(Apiurl)
+      
+      const Apiurl =`http://localhost:8080/taxation?price=${ticketPrice}`
+      const options ={
+        method:'POST'
+      }
+      const response = await fetch(Apiurl,options)
       const fetcheddata = await response.json()
       const data = fetcheddata
       if (response.ok) {
-        const formatedData = data.map(each => ({
-            Total: each.total,
-          TicketPrice: each.ticket_price,
-          SalesTax: each.sales_tax,
-          ServiceTax: each.service_tax,
-        }))
+       
         setApiDetails(prevApiDetails => ({
           ...prevApiDetails,
           apiStatus: apiStatusConstants.success,
-          responseData: formatedData,
+          responseData: data,
         }))
       } else {
         setApiDetails(prevApiDetails => ({
@@ -48,10 +48,12 @@ const Paymentapi = () => {
       }
     }
     gettingViedos()
-  }, [])
+  }, [ticketPrice])
+
+  console.log(ticketPrice)
   const successView = () => {
     const {responseData} = apiDetails
-    return <Payment Paymentdata={responseData} />
+    return <Payment Paymentdata={responseData} tic={ticketPrice}/>
   }
   const failureView = () => {
     return (
@@ -62,9 +64,10 @@ const Paymentapi = () => {
     )
   }
   const renderLoadingView = () => (
-    <div data-testid='loader'>
-      <Loader type='Rings' color='#ffffff' height={80} width={80} />
-    </div>
+    <div>
+    {/*  <Loader type='Rings' color='#ffffff' height={80} width={80} /> */}
+    <p>Loading the Loader</p>
+    </div> 
   )
   const renderView = () => {
     // const {apiStatus} = apiDetails

@@ -6,9 +6,9 @@ import {
     CardTitle,
   } from "@/components/ui/card";
   import { FaApple } from 'react-icons/fa';
-  const Payment =()=>{
-    const{Paymentdata}=props
-    const{TicketPrice,SalesTax,ServiceTax,Total}=Paymentdata
+  const Payment =(props)=>{
+    const{Paymentdata,tic}=props
+    const{salesTax,serviceTax,totalPrice}=Paymentdata
     return(
       
         <div>
@@ -33,17 +33,17 @@ import {
         <div className="flex justify-between gap-10">
              <div className="flex flex-col space-y-1.5 w-[50%]">
              <label htmlFor="mail" className="font-semibold">
-                     Ticket Price : {TicketPrice}
+                     Ticket Price : {tic}
               </label>
         
              <label htmlFor="mail" className="font-semibold">
-                     Sales tax : {SalesTax}
+                     Sales tax : {salesTax}
               </label>
               <label htmlFor="mail" className="font-semibold">
-                     Service tax : {ServiceTax}
+                     Service tax : {serviceTax}
               </label>
               <label htmlFor="mail" className="font-semibold">
-                     total : {Total}
+                     total : {totalPrice}
               </label>
                     
                   </div>

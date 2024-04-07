@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -73,9 +73,11 @@ const TrainDetails = () => {
     }));
   };
 
+  const navigate = useNavigate();
   const handleSubmitBooking = () => {
-    // Handle booking submission
+    navigate('/Payment');
     console.log("Booking submitted:", bookingDetails);
+  
   };
 
   if (!train) return <div>Loading...</div>;
@@ -334,6 +336,7 @@ const TrainDetails = () => {
                 <p className="text-gray-700 text-3xl">
                   Total Price: ${bookingDetails.totalPrice}
                 </p>
+              
                 <button
                   onClick={handleSubmitBooking}
                   className={`ml-5 py-3 px-8 rounded font-bold text-white ${
@@ -347,6 +350,7 @@ const TrainDetails = () => {
                     ? "Select Cabin"
                     : "Go to checkout"}
                 </button>
+              
               </div>
             </div>
           </CardContent>

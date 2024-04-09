@@ -7,9 +7,9 @@ import SearchResult from "./pages/SearchResult";
 import TrainDetails from "./pages/TrainDetails";
 import Profileapi from "./pages/Profileapi";
 import Paymentapi from "./pages/Paymentapi";
-
 import Validation from "./pages/Validation"
 import Contactus from "./components/ContactUs"
+import Paymentsuccess from "./pages/Paymentsuccess";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/Contactus",
     element: <Contactus />,
+  },
+  {
+    path: "/paymentsuccess",
+    element: <Paymentsuccess />,
   },
  {/* {
     path: "/update/:fname/:lname/:add/:mobileNumber/:email/:password",

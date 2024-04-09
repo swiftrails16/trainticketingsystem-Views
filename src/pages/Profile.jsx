@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link ,useNavigate} from "react-router-dom";
 
 import axios from 'axios';
 import {
@@ -10,17 +11,18 @@ import {
   } from "@/components/ui/card";
   import { PasswordInput } from "@/components/ui/passwordInput";
 const Profile=(props)=>{
-    const {profiledata} = props;
-    const {firstName, lastName,address,phoneNumber}=profiledata
-
-
-    const [mobileNumber, setMobileNumber] = useState({phoneNumber});
-    const [email, setEmail] = useState('Swiftrails@gmail.com');
-    const [password, setPassword] = useState('');
-    const[fname,setName]=useState({firstName});
-    const[lname,setlName]=useState({lastName});
-    const[add,setAdd]=useState({address});
+    const {Profiledata} = props;
     
+    const {fname, lname,address,password,email,phone_number}=Profiledata
+
+
+    const [mobileNumber, setMobileNumber] = useState(phone_number);
+    const [mail, setEmail] = useState(email);
+    const [pass, setPassword] = useState(password);
+    const[firstname,setName]=useState(fname);
+    const[lastname,setlName]=useState(lname);
+    const[add,setAdd]=useState(address);
+    const navigate = useNavigate()
     const handleMobileNumberChange = (e) => {
       setMobileNumber(e.target.value);
     };
@@ -37,19 +39,21 @@ const Profile=(props)=>{
         setlName(e.target.value);
       };
       const handleSubmit = async (e) => {
+      
         
         try {
           const response = await axios.put(
-            `http://localhost:8080/updateUser?email=${email}&password=${password}&firstName=${fname}&lastName=${lname}&address=${add}&phoneNumber=${mobileNumber}`,
+            `http://localhost:8080/updateUser?email=${mail}&password=${pass}&firstName=${firstname}&lastName=${lastname}&address=${add}&phoneNumber=${mobileNumber}`,
             
           );
           console.log('User updated successfully:', response.data);
-          const {email,firstName, lastName,address,phoneNumber} = response.data;
-           setlName(lastName);
-          setName(firstName);
-          setAdd(address);
-          setMobileNumber(phoneNumber);
-          setEmail(email);
+          const {fname, lname,addr,pword,mailid,phno} = response.data;
+           setlName(lname);
+          setName(fname);
+          setAdd(addr);
+          setMobileNumber(phno);
+          setEmail(mailid);
+          setPassword(pword)
         } catch (error) {
           console.error('Error updating user:', error.message);
           // Handle error (e.g., show an error message)
@@ -63,6 +67,9 @@ const Profile=(props)=>{
           await axios.delete(`http://localhost:8080/deleteUser?email=${email}`);
           // Update your local state or refetch data
           // ...
+          window.location.href = '/register';
+
+          
         } catch (error) {
           console.error('Error deleting item:', error);
         }
@@ -91,7 +98,7 @@ const Profile=(props)=>{
                       
                       onChange={handleNameChange}
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-500"
-                      value={fname}
+                      value={firstname}
                       placeholder="Enter your Name"
                     />
                   </div>
@@ -103,7 +110,7 @@ const Profile=(props)=>{
                       
                       onChange={handleLnameChange}
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-500"
-                      value={lname}
+                      value={lastname}
                       placeholder="Enter your Name"
                     />
                   </div>
@@ -132,7 +139,7 @@ const Profile=(props)=>{
                     <input
                       onChange={handleMobileEmailChange}
                       type="email"
-                      value={email}
+                      value={mail}
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-500"
                       
                       placeholder="Enter your Email Address"

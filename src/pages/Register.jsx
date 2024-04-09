@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import axios from 'axios';
+
 import {
   Card,
   CardBackground,
@@ -38,9 +40,9 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const navigate = useNavigate()
   const handleRegister = async (e) => {
-        
+        console.log("madhu")
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         `http://localhost:8080/registerUser?email=${email}&password=${password}&firstName=${fname}&lastName=${lname}&address=${address}&phoneNumber=${phoneNumber}`,
         
       );

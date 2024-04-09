@@ -1,40 +1,47 @@
-import { useParams } from 'react-router-dom'
-import { useNavigate} from "react-router-dom";
-import {useState} from 'react'
+import { useParams, useNavigate ,Navigate,Link} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
+    CardFooter,
     CardTitle,
   } from "@/components/ui/card";
 
 
+  import { Button } from "@/components/ui/button";
 
+  const Validation = () => {
+    const { email } = useParams();
+    const [otp, setOtp] = useState("");
+    
+    const navigate = useNavigate();
+  
+    const handleValidation = async (e) => {
+     {console.log("madhu")
+  try {
+    const response = await axios.post(
+      `http://localhost:8080/validateOTP?email=${email}&otp=${otp}`,
+      
+    );
+    console.log('User added successfully:', response.data);
+    window.location.href = '/login';
 
-  const Validation =()=>{
-    const {email}=useParams()
-    const [otp,setOtp]=useState("")
-    const navigate = useNavigate()
-    const handleValidation = async () => {
-        const response = await fetch(`http://localhost:8080/validateOTP?email=${email}&otp=${otp}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ otp }),
-        });
+    
+  }
+  
+   catch (error) {
+    console.error('Error updating user:', error.message);
+    // Handle error (e.g., show an error message)
+  }
 
-        const data = await response.json();
-
-        if (data.success) {
-            navigate('/login')
-        } else {
-            <p>invalid OTP</p>
-        }
-    };
-
+}
+};
+  
+    
     return(
 <div className="m-10">
         <Card className="p-5">
@@ -43,7 +50,7 @@ import {
 
           </CardHeader>
           <CardContent>
-            <form >
+            <form  >
               <div className="grid w-full items-center gap-8 mt-7">
                 <div className="flex justify-between gap-10">
                   <div className="flex flex-col space-y-1.5 w-[50%]">
@@ -60,18 +67,18 @@ import {
                   </div>
                  
                 </div>
-                <div className="flex flex-col space-y-1.5">
-                  <button
-                    type="submit"
-                    className="bg-[#5a3970] hover:bg-[#482e5a] font-medium border-2 border-transparent hover:border-[#7e529e] shadow-md transition text-white p-2 rounded"
-                    onclick={handleValidation}
-                  >
-                    Validate
-                  </button>
-                </div>
+                
               </div>
             </form>
           </CardContent>
+          <CardFooter className="flex flex-col justify-between">
+              <div className="flex w-full justify-between">
+                {/*<Link to={`/validation/${fname}/${lname}/${phoneNumber}/${email}/${password}/${address}`}></Link>*/}
+                
+                <Button className="w-full rounded-3xl" onClick={handleValidation}>Register</Button>
+                
+              </div>
+            </CardFooter>
         </Card>
       </div>
     )

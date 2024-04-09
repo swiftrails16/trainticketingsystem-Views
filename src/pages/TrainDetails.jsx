@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -30,7 +30,7 @@ const TrainDetails = () => {
       gender: "",
       age: "",
     },
-    totalPrice: 0,
+    ticketPrice: 0,
   });
 
   const handlePassengerChange = (type, value) => {
@@ -65,18 +65,16 @@ const TrainDetails = () => {
       cabinFare = 20;
     }
     // const fare = cabinType ? train.data.fare[cabinType] : 0;
-    const totalPrice = cabinFare * bookingDetails.passengers.adult;
+    const ticketPrice = cabinFare * bookingDetails.passengers.adult;
     setBookingDetails((prevDetails) => ({
       ...prevDetails,
       cabinType,
-      totalPrice,
+      ticketPrice,
     }));
   };
 
-  const handleSubmitBooking = () => {
-    // Handle booking submission
-    console.log("Booking submitted:", bookingDetails);
-  };
+  
+ 
 
   if (!train) return <div>Loading...</div>;
 
@@ -332,10 +330,11 @@ const TrainDetails = () => {
               </div>
               <div className="flex mt-10 p-5 justify-end items-center">
                 <p className="text-gray-700 text-3xl">
-                  Total Price: ${bookingDetails.totalPrice}
+                  Total Price: ${bookingDetails.ticketPrice}
                 </p>
+              <Link to={`/Payment/${bookingDetails.ticketPrice}`}>
                 <button
-                  onClick={handleSubmitBooking}
+                  
                   className={`ml-5 py-3 px-8 rounded font-bold text-white ${
                     bookingDetails.cabinType === ""
                       ? "bg-gray-400"
@@ -347,6 +346,7 @@ const TrainDetails = () => {
                     ? "Select Cabin"
                     : "Go to checkout"}
                 </button>
+              </Link>
               </div>
             </div>
           </CardContent>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import axios from 'axios';
+
 import {
   Card,
   CardBackground,
@@ -13,15 +15,36 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/passwordInput";
 import { Link } from "react-router-dom";
-
+import {useNavigate} from 'react-router-dom'
 import { IMAGES } from "@/assets/imgs/Images";
-
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate()
+  const submitForm = async () => {
+    
+      console.log("madhu")
+   try {
+     const response = await axios.post(
+       `http://localhost:8080/login?email=${username}&password=${password}`,
+       
+     );
+     console.log('User added successfully:', response.data);
+     window.location.href = '/Search';
+ 
+     
+   }
+   
+    catch (error) {
+     console.error('Error updating user:', error.message);
+     // Handle error (e.g., show an error message)
+   }
+ 
+ 
+ };
   return (
     <div className="container mx-auto py-10 flex flex-col lg:flex-row h-screen justify-between">
+     
       <Card className="w-full lg:w-1/2 mb-5 lg:mb-0 lg:mr-5">
         <div className="flex flex-col h-full justify-center">
           <div className="p-10">
@@ -57,11 +80,11 @@ const Login = () => {
             </CardContent>
             <CardFooter className="flex flex-col justify-between">
               <div className="flex w-full justify-between">
-                <Link className="w-[70%]" to={"/search"}>
-                  <Button className="w-full lg:w-1/2 rounded-3xl">
+                {/*<Link to={'/search'}>*/}
+                  <Button className="w-full lg:w-1/2 rounded-3xl" onClick={submitForm}>
                     Log in
                   </Button>
-                </Link>
+                  
                 <h5 className="scroll-m-20 text-sm font-normal underline tracking-tight self-center">
                   Forgot your password?
                 </h5>

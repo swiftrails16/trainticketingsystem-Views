@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import Payment from './Payment'
+import Profile from './Profile'
 import { useParams } from 'react-router-dom'
 
 
@@ -10,8 +10,8 @@ const apiStatusConstants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
 }
-const Paymentapi = () => {
-  const {ticketPrice}=useParams()
+const Profileapi = () => {
+ 
   const [apiDetails, setApiDetails] = useState({
     apiStatus: apiStatusConstants.initial,
     responseData: null,
@@ -25,11 +25,12 @@ const Paymentapi = () => {
         errorMsg: null,
       })
       
-      const Apiurl =`http://localhost:8080/taxation?price=${ticketPrice}`
+      const Apiurl ='http://localhost:8080/findEmail?email=mm01479n@pace.edu'
       const options ={
-        method:'POST'
+        method:'GET'
       }
       const response = await fetch(Apiurl,options)
+    
       const fetcheddata = await response.json()
       const data = fetcheddata
       if (response.ok) {
@@ -48,12 +49,11 @@ const Paymentapi = () => {
       }
     }
     gettingViedos()
-  }, [ticketPrice])
+  }, [])
 
-  console.log(ticketPrice)
   const successView = () => {
     const {responseData} = apiDetails
-    return <Payment Paymentdata={responseData} tic={ticketPrice}/>
+    return <Profile Profiledata={responseData} />
   }
   const failureView = () => {
     return (
@@ -66,7 +66,7 @@ const Paymentapi = () => {
   const renderLoadingView = () => (
     <div>
     {/*  <Loader type='Rings' color='#ffffff' height={80} width={80} /> */}
-    <p>Loading the Loader</p>
+    <p>Loading the Profile</p>
     </div> 
   )
   const renderView = () => {
@@ -84,4 +84,4 @@ const Paymentapi = () => {
   }
   return <div>{renderView()}</div>
 }
-export default Paymentapi
+export default Profileapi

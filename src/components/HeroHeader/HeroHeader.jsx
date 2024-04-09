@@ -26,9 +26,16 @@ const HeroHeader = () => {
           <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
             Services
           </a>
+          <Link to={"/Contactus"}>
           <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
             Contact
           </a>
+          </Link>
+          <Link to={"/Profile"}>
+          <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
+            Profile
+          </a>
+          </Link>
         </div>
 
         <div className="p-4 md:hidden"></div>

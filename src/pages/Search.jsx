@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+
 import { IMAGES } from "@/assets/imgs/Images";
 import {
   Card,
@@ -8,8 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
+import AdsComponent from "./AdsComponent";
 const Search = () => {
+  const image2 = 'https://cdn.dribbble.com/users/5297140/screenshots/13995477/media/3769cfb75e2e53734862cc0a3bc1c732.gif'
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [date, setDate] = useState("");
@@ -27,6 +30,8 @@ const Search = () => {
         alt="train"
         className="w-full h-[300px] object-cover"
       />
+
+       <AdsComponent />
       <div className="m-10">
         <Card className="p-5">
           <CardHeader>

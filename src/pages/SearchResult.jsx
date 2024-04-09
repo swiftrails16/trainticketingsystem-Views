@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import AdsComponent from "./AdsComponent";
 import { IMAGES } from "@/assets/imgs/Images";
 import {
   Card,
@@ -17,7 +18,7 @@ const SearchResult = () => {
   const navigate = useNavigate();
   const [filteredTrains, setFilteredTrains] = useState([]);
   const [trainsData, setTrainsData] = useState([]);
-
+  const image1 = 'https://i.pinimg.com/originals/06/9d/61/069d617dca720be2d65014963515d28e.gif'
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -100,6 +101,7 @@ const SearchResult = () => {
             )}
           </CardContent>
         </Card>
+        <AdsComponent image={image1}  />
       </div>
     </div>
   );

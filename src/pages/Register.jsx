@@ -20,7 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
@@ -29,11 +29,28 @@ import { IMAGES } from "@/assets/imgs/Images";
 import { Separator } from "@/components/ui/separator";
 
 const Register = () => {
-  const [name, setName] = useState("");
+  const [fname, setfName] = useState("");
+  const [lname, setlName] = useState("");
+  const [phoneNumber, setPhoneno] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
-  const [date, setDate] = useState("");
+  const [address, setAddress] = useState("");
+  const navigate = useNavigate()
+  const handleRegister = async (e) => {
+        
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/registerUser?email=${email}&password=${password}&firstName=${fname}&lastName=${lname}&address=${address}&phoneNumber=${phoneNumber}`,
+        
+      );
+      console.log('User added successfully:', response.data);
+      navigate(`/validation/${email}`)
+    } catch (error) {
+      console.error('Error updating user:', error.message);
+      // Handle error (e.g., show an error message)
+    }
+  };
 
   return (
     <div className="container mx-auto py-10 flex flex-col lg:flex-row h-screen justify-between">
@@ -50,42 +67,35 @@ const Register = () => {
               <form>
                 <div className="grid w-full items-center gap-4">
                   <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name">First Name</Label>
                     <Input
                       id="name"
-                      placeholder="enter your full name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      placeholder="enter your first name"
+                      value={fname}
+                      onChange={(e) => setfName(e.target.value)}
                     />
                   </div>
+                  <div className="grid w-full items-center gap-4">
                   <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="dob">Date of Birth</Label>
-                    <Popover id="dob">
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "justify-start text-left font-normal w-full",
-                            !date && "text-muted-foreground"
-                          )}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {date ? (
-                            format(date, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0">
-                        <Calendar
-                          mode="single"
-                          selected={date}
-                          onSelect={setDate}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
+                    <Label htmlFor="name">Last Name</Label>
+                    <Input
+                      id="name"
+                      placeholder="enter your Last name"
+                      value={lname}
+                      onChange={(e) => setlName(e.target.value)}
+                    />
+                  </div>
+                  <div className="grid w-full items-center gap-4">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      placeholder="enter your phone number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneno(e.target.value)}
+                    />
+                  </div>
+                  </div>
                   </div>
                   <Separator className="mt-2" />
                   <div className="flex flex-col space-y-1.5">
@@ -95,6 +105,15 @@ const Register = () => {
                       placeholder="enter your email address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="address"> Address</Label>
+                    <Input
+                      id="address"
+                      placeholder="enter your address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
                     />
                   </div>
                   <div className="flex flex-col space-y-1.5">
@@ -120,7 +139,10 @@ const Register = () => {
             </CardContent>
             <CardFooter className="flex flex-col justify-between">
               <div className="flex w-full justify-between">
-                <Button className="w-full rounded-3xl">Register</Button>
+                {/*<Link to={`/validation/${fname}/${lname}/${phoneNumber}/${email}/${password}/${address}`}></Link>*/}
+                
+                <Button className="w-full rounded-3xl" onClick={handleRegister}>Register</Button>
+                
               </div>
             </CardFooter>
           </div>

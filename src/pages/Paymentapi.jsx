@@ -1,8 +1,6 @@
 import {useState, useEffect} from 'react'
 import Payment from './Payment'
-import { useParams } from 'react-router-dom'
-
-
+import { useParams } from "react-router-dom";
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -11,7 +9,7 @@ const apiStatusConstants = {
   failure: 'FAILURE',
 }
 const Paymentapi = () => {
-  const {ticketPrice}=useParams()
+  const { ticketPrice } = useParams();
   const [apiDetails, setApiDetails] = useState({
     apiStatus: apiStatusConstants.initial,
     responseData: null,
@@ -24,12 +22,14 @@ const Paymentapi = () => {
         responseData: null,
         errorMsg: null,
       })
-      
-      const Apiurl =`http://localhost:8080/taxation?price=${ticketPrice}`
+
+      const Apiurl = `http://localhost:8080/taxation?price=${ticketPrice}`
+
       const options ={
         method:'POST'
       }
-      const response = await fetch(Apiurl,options)
+
+      const response = await fetch(Apiurl, options)
       const fetcheddata = await response.json()
       const data = fetcheddata
       if (response.ok) {
@@ -49,8 +49,6 @@ const Paymentapi = () => {
     }
     gettingViedos()
   }, [ticketPrice])
-
-  console.log(ticketPrice)
   const successView = () => {
     const {responseData} = apiDetails
     return <Payment Paymentdata={responseData} tic={ticketPrice}/>
@@ -58,16 +56,16 @@ const Paymentapi = () => {
   const failureView = () => {
     return (
       <div>
-        
+
         <p>Error</p>
       </div>
     )
   }
   const renderLoadingView = () => (
-    <div>
-    {/*  <Loader type='Rings' color='#ffffff' height={80} width={80} /> */}
-    <p>Loading the Loader</p>
-    </div> 
+    <div data-testid='loader'>
+      {/* <Loader type='Rings' color='#ffffff' height={80} width={80} /> */}
+      <p>loading the class</p>
+    </div>
   )
   const renderView = () => {
     // const {apiStatus} = apiDetails

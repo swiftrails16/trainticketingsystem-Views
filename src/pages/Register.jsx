@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import Header1 from "@/components/HeroHeader/Header1";
-import axios from 'axios';
-
 import {
   Card,
   CardBackground,
@@ -41,9 +38,9 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const navigate = useNavigate()
   const handleRegister = async (e) => {
-        console.log("madhu")
+        
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `http://localhost:8080/registerUser?email=${email}&password=${password}&firstName=${fname}&lastName=${lname}&address=${address}&phoneNumber=${phoneNumber}`,
         
       );
@@ -56,10 +53,6 @@ const Register = () => {
   };
 
   return (
-    <div>
-    <Header1/>
-    <br/>
-    <br/>
     <div className="container mx-auto py-10 flex flex-col lg:flex-row h-screen justify-between">
       <Card className="w-full lg:w-1/2 mb-5 lg:mb-0 lg:mr-5">
         <div className="flex flex-col h-full justify-center">
@@ -165,7 +158,7 @@ const Register = () => {
             </CardDescription>
           </CardHeader>
           <CardFooter className="flex">
-            <Link to="/" className="w-full" style={{ zIndex: 1 }}>
+            <Link to="/login" className="w-full" style={{ zIndex: 1 }}>
               <Button variant="outline" className="w-full lg:w-1/3 rounded-3xl">
                 Login
               </Button>
@@ -174,7 +167,6 @@ const Register = () => {
         </div>
         <CardBackground src={IMAGES.formTrain} alt={"Form Train"} />
       </Card>
-    </div>
     </div>
   );
 };

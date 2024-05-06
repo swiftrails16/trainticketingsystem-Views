@@ -8,7 +8,7 @@ const HeroHeader = () => {
         <div className="p-4">
           <div className="font-extrabold tracking-widest text-2xl">
             <a>
-              <span style={{ color: "#1f255a" ,fontFamily:"cursive", }}>swiftrails</span>
+              <span style={{ color: "#1f255a" }}>swiftrails</span>
             </a>
           </div>
         </div>

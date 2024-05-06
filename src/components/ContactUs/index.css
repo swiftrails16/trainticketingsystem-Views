@@ -1,19 +1,382 @@
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+html, 
+body {
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: helvetica;
+    font-weight: 300;
+}
+
+
+.contact a,
+.contact button{
+    display: inline-block;
+    padding: 14px 30px;
+    text-decoration: none;
+    color: #243342;
+    letter-spacing: 1.2px;
+    font-size: 14px;
+    border: 1px solid #243342;
+    border-radius: 7px;
+    margin-right: 20px;
+    transition: 0.15s ease-in-out;
+}
+.contact a.focus,
+.contact button{
+    color: white;
+    background: #243342;
+}
+.contact a.focus:hover,
+.contact button:hover{
+	cursor: pointer;
+   color: #1bf1dc;
+}
+.contact a:hover {
+    background-color: #243342;
+    color: #16f1d7;
+}
+
+.contact nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: rgb(36, 51, 66);
+}
+
+
+
+.conatact nav .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5%;
+}
+.conatct nav .hamburger {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+}
+.contact nav .hamburger:hover{
+    cursor: pointer;
+}
+
+.contact nav .hamburger:hover span.slice {
+    background-color: #b9bbbd;
+}
+
+.contact nav .hamburger span.slice {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.contact nav.open .hamburger span.cheese.slice {
+    opacity: 0;
+}
+
+.contact nav.open .hamburger span.lettuce.slice {
+    transform-origin: center left;
+    transform: rotate(43deg);
+}
+
+.contact nav.open .hamburger span.beef.slice {
+    transform-origin: center left;
+    transform: rotate(-43deg);
+}
+
+.conatact nav.open .linkWrapper {
+    opacity: 1;
+    display: flex;
+    pointer-events: initial;
+}
+
+
+.conatct nav h1 {
+    color: white;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 1.2px;
+}
+
+.contact nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 15px;
+    font-weight: 300;
+    letter-spacing: 1.2;
+    border: none;
+    margin: 0;
+}
+.contact a.active {
+    color: #16f1dc;
+    font-weight: 500;
+}
+
+.contact .map{
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+}
+.contact .map:after{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	
+}
+
+
+
+
+.contact .content{
+	position: fixed;
+	top: 60px;
+	height: calc(100vh - 60px);
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: auto;
+	padding: 20px;
+}
+
+
+.contact .contact1{
+	width: 80%;
+	max-width: 1080px;
+	display: flex;
+	 box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.28);
+ border-radius: 5px;
+ overflow: hidden;
+}
+
+
+.contact .other{
+	width: 60%;
+	background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cbdb7386-b6fd-4746-88cf-71a3cab14a3d/dfw8car-6f3be888-b348-48f8-b137-ce4f3a6a4977.jpg/v1/fill/w_1280,h_1280,q_75,strp/old_train__smoke_by_artvakato_dfw8car-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2NiZGI3Mzg2LWI2ZmQtNDc0Ni04OGNmLTcxYTNjYWIxNGEzZFwvZGZ3OGNhci02ZjNiZTg4OC1iMzQ4LTQ4ZjgtYjEzNy1jZTRmM2E2YTQ5NzcuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.pv7SWi1DEi4UmU9C_8nNzMY-JhAhelXa_pFVM01hwd8);
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	display: flex;
+ flex-direction: column;
+ justify-content: flex-end;
+}
+
+
+.contact .other:before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	
+}
+
+
+
+
+
+
+.contact .form{
+	width: 40%;
+	background-color: white;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	
+}
+.contact .form h1{
+	text-align: center;
+	margin-bottom: 20px;
+	width: 100%;
+}
+.contact .form form{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.contact .flex-rev {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 10px;
+		width: 100%;
+}
+
+.contact .flex-rev input, .flex-rev textarea {
+    border: none;
+    background-color: #e6e6e6;
+    padding: 12px 10px;
+    font-size: 16px;
+    resize: none;
+    margin-top: 7px;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    color: #243342;
+    outline-color: #243342;
+    outline-width: thin;
+	 -webkit-appearance: none;
+}
+.contact .flex-rev textarea{
+	height: 150px;
+}
+.contact  textarea{
+	width: calc(100% - 10px); /* Adjusted to accommodate button */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical; /* Allow vertical resizing */
+  margin-bottom: 10px;
+}
+.contact button{
+	-padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.contact button:hover {
+    background-color: #0056b3;
+  }
+
+.contact .info {
+    position: relative;
     padding: 20px;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  p {
-    margin-bottom: 10px;
-  }
+}
+
+.contact h2 {}
+
+.contact .info h2 {
+    color: #2f0508;
+    font-size: 34px;
+    font-family:cursive;
+}
+
+.contact .info h3 {
+    color: black;
+    letter-spacing: 1.2px;
+    margin-top:  20px;
+}
+
+.contact .svg-wrap {
+    display: flex;
+    margin-top: 14px;
+}
+
+.contact .svg-wrap a {
+    border: 0;
+    padding: 0;
+    display: flex;
+    color: #bbbbbb;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+}
+
+.contact .svg-wrap a svg {
+    width: 20px;
+    height: 20px;
+    fill:#007bff;
+    transition: fill 0.2s ease-in-out;
+    margin-right: 13px;
+}
+
+.contact .svg-wrap a:hover svg {
+    fill: #16f1dc;
+    cursor: pointer;
+}
+
+.contact .svg-wrap a:hover {
+    background-color: transparent;
+    color: #16f1dc;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 900px){
+	.contact .content{
+		padding: 10px 0 0;
+		display: block;
+	}
+	.contact .map{
+		display: none;
+	}
+	.contact .contact1{
+		width: 100%;
+		flex-direction: column-reverse;
+		border-radius: 0;
+		box-shadow: 0px 0px 0px 0px;
+	}
+	.contact .other{
+		width: 100%;
+		padding: 20px 0;
+	}
+	.contact .form{
+		width: 100%;
+	}
+}
+
+@media screen and (max-height: 660px){
+	.contact .content{
+		align-items: flex-start;
+	}
+}
+
+
+@media screen and (max-width: 660px){
+    .contact nav .hamburger{
+        opacity: 1;
+        pointer-events: initial;
+    }
+    .contact nav div.linkWrapper{
+        top: 0;
+        right: 0;
+        position: fixed;
+        height: 100vh;
+        background-color: rgba(36, 51, 66, 0.9);
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;
+        box-shadow: -10px 0px 20px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        justify-content: center;
+        will-change: transform;
+        opacity: 0;
+        display: none;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .contact nav div a {
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: 300;
+        letter-spacing: 1.5;
+        width: 100%;
+        margin-bottom: 31px;
+        text-align: center;
+        font-size: 38px;
+    }
+    
+}

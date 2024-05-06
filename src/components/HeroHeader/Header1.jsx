@@ -1,7 +1,7 @@
 import { IMAGES } from "@/assets/imgs/Images";
 import { Link } from "react-router-dom";
 
-const HeroHeader = () => {
+const Header1 = () => {
   return (
     <>
       <nav className="fixed inset-x-0 top-0 p-5 pl-10 pr-10 flex flex-row justify-between z-10 text-white bg-transparent">
@@ -14,26 +14,28 @@ const HeroHeader = () => {
         </div>
 
         <div className="p-4 hidden md:flex flex-row justify-center font-bold">
+        <Link to={"/"}>
           <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
-            Home
+          <span style={{ color: "#1f255a" }}>Home</span>
+          </a>
+          </Link>
+          <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
+          <span style={{ color: "#1f255a" }}>About Us</span>
           </a>
           <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
-            About Us
+          <span style={{ color: "#1f255a" }}>How it works</span>
           </a>
           <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
-            How it works
-          </a>
-          <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
-            Services
+          <span style={{ color: "#1f255a" }}>Services</span>
           </a>
           <Link to={"/Contactus"}>
           <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
-            Contact
+          <span style={{ color: "#1f255a" }}>Contact</span>
           </a>
           </Link>
           <Link to={"/Profile"}>
           <a className="mx-4 text-md border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500 cursor-pointer">
-            Profile
+          <span style={{ color: "#1f255a" }}>Profile</span>
           </a>
           </Link>
         </div>
@@ -53,33 +55,8 @@ const HeroHeader = () => {
         </div>
       </div>
 
-      <header
-        className="bg-fixed bg-no-repeat bg-center bg-cover h-screen relative"
-        style={{ backgroundImage: `url(${IMAGES.heroImage})` }}
-      >
-        <div
-          className="h-screen bg-opacity-50 bg-black flex items-center justify-center"
-          style={{ background: "rgba(0,0,0,0.25)" }}
-        >
-          <div className="mx-2 text-center">
-            <h1 className="text-gray-100 font-bold text-4xl xs:text-5xl md:text-5xl">
-              Welcome Aboard: SwiftRails
-            </h1>
-            <h2 className="text-gray-200 font-bold text-3xl xs:text-4xl md:text-5xl mt-5">
-              Your Ultimate Journey Companion
-            </h2>
-            <div className="inline-flex mt-8">
-              <Link to={"/login"}>
-                <button className="p-2 py-3 px-8 my-5 mx-2 bg-[#5a3970] hover:bg-[#482e5a] font-bold text-white rounded-md border-2 border-transparent hover:border-[#7e529e] shadow-md transition duration-500 md:text-xl">
-                  Get Started
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
     </>
   );
 };
 
-export default HeroHeader;
+export default Header1;

@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import Header1 from "@/components/HeroHeader/Header1";
+import axios from 'axios';
+
 import {
   Card,
   CardBackground,
@@ -53,6 +56,10 @@ const Register = () => {
   };
 
   return (
+    <div>
+    <Header1/>
+    <br/>
+    <br/>
     <div className="container mx-auto py-10 flex flex-col lg:flex-row h-screen justify-between">
       <Card className="w-full lg:w-1/2 mb-5 lg:mb-0 lg:mr-5">
         <div className="flex flex-col h-full justify-center">
@@ -167,6 +174,7 @@ const Register = () => {
         </div>
         <CardBackground src={IMAGES.formTrain} alt={"Form Train"} />
       </Card>
+    </div>
     </div>
   );
 };

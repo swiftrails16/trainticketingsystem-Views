@@ -25,9 +25,9 @@ const Profileapi = () => {
         errorMsg: null,
       })
       
-      const Apiurl ='http://localhost:8080/findEmail?email=mm01479n@pace.edu'
+      const Apiurl ='http://localhost:8080/findEmail?email=monilmody9@gmail.com'
       const options ={
-        method:'GET'
+        method:'POST'
       }
       const response = await fetch(Apiurl,options)
     

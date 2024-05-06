@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import axios from 'axios';
+import Header from "@/components/Header";
+import Header1 from "@/components/HeroHeader/Header1";
 import {
   Card,
   CardBackground,
@@ -15,34 +18,38 @@ import { PasswordInput } from "@/components/ui/passwordInput";
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
 import { IMAGES } from "@/assets/imgs/Images";
-
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
   const submitForm = async () => {
-    console.log("madhu")
-    const userDetails = {username, password}
-    console.log(username)
-    const url = `http://localhost:8080/login?email=${username}&password=${password}`
-    console.log("madhu")
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-    }
-    const response = await fetch(url, options)
-    const data = await response.json()
-    if (data.ok) {
-      navigate('/Search')
-    } else {
-      return(
-        <div>
-          <p>Error</p>
-        </div>
-      )
-    }
-  }
+    
+      console.log("madhu")
+   try {
+     const response = await axios.post(
+       `http://localhost:8080/login?email=${username}&password=${password}`,
+       
+     );
+     console.log('User added successfully:', response.data);
+     window.location.href = '/Search';
+ 
+     
+   }
+   
+    catch (error) {
+     console.error('Error updating user:', error.message);
+     // Handle error (e.g., show an error message)
+   }
+ 
+ 
+ };
   return (
+    <div>
+      <Header1/>
+    <br/>
+    <br/>
+    
+
     <div className="container mx-auto py-10 flex flex-col lg:flex-row h-screen justify-between">
      
       <Card className="w-full lg:w-1/2 mb-5 lg:mb-0 lg:mr-5">
@@ -155,6 +162,7 @@ const Login = () => {
         </div>
         <CardBackground src={IMAGES.formTrain} alt={"Form Train"} />
       </Card>
+    </div>
     </div>
   );
 };

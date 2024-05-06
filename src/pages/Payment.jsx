@@ -270,15 +270,15 @@ import { FaApple } from 'react-icons/fa';
 import axios from 'axios';
 
 const Payment =(props)=>{
-  const{Paymentdata,tic}=props
+  const{Paymentdata,tic,cabin,to,from,train}=props
   const{salesTax,serviceTax,totalPrice}=Paymentdata
-  
+  const [pcode,setPcode]=useState('');
   const [email, setEmail] = useState('');
   const [cardno, setCardno] = useState('');
   const [cardexp, setCardexp] = useState('');
   const[cardcvv,setCardcvv]=useState('');
-   const[name, setName] = useState('');
-
+  const[name, setName] = useState('');
+   const [discountedPrice, setDiscountedPrice] = useState(null);
  const handleronEmailChange=(e)=>{
   setEmail(e.target.value);
  }
@@ -295,13 +295,46 @@ const handleronCardnameChange=(e)=>{
   setName(e.target.value);
  }
 
+
+ const handleronPcodeChange=(e)=>{
+  setPcode(e.target.value);
+ }
+
+
+
+
+
+
+
+
+ const fetchDiscountedPrice=async()=> {
+  try {
+      const response = await axios.post(
+          `http://localhost:8080/promotions?mailId=bharambedipesh123@gmail.com&promotionCode=${pcode}&amount=${totalPrice}`
+      );
+
+      // Extract the discountPrice from response.data
+      const discountPrice = response.data.discountPrice;
+
+      // Set the discountPrice in the component state
+      setDiscountedPrice(discountPrice);
+  } catch (error) {
+      console.error('Error updating user:', error.message);
+      // Handle the error (e.g., show an error message to the user)
+  }
+}
+
+
+
+
   const handlePayment=async()=>{
      try {
     
-    const response = await axios.get(
-      `http://localhost:8080/generatePDF?mailId=${email}&cardNumber=${cardno}&cardExpiry=${cardexp}&cardCVV=${cardcvv}&amount=123.45&name=${name}&trainName=Express&date=04/28/2024`,
+    const response = await axios.put(
+     
+     `http://localhost:8080/generatePDF?mailId=${email}&cardNumber=${cardno}&cardExpiry=${cardexp}&cardCVV=${cardcvv}&amount=${discountedPrice}&name=${name}&trainName=${train}&date=04/28/2024&from_station=${from}&to_station=${to}&seat=${cabin}`
     );
-
+    console.log('Authentication successfully:', response.data);
     
   } catch (error) {
     console.error('Error updating user:', error.message);
@@ -345,7 +378,30 @@ const handleronCardnameChange=(e)=>{
             <label htmlFor="mail" className="font-semibold">
                    total : {totalPrice}
             </label>
+
+
+
+            <div className="flex flex-col space-y-1.5 w-[50%]">
+                  <label htmlFor="mail" className="font-semibold">
+                    Promotion Code
+                  </label>
+                  <input
+                    
+                    type="text"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-500"
+                    value={pcode}
+                    placeholder="Enter your Promotion code"
+                    onChange={handleronPcodeChange}
+                  />
+                
+                <button onClick={fetchDiscountedPrice}>verify</button>
+            </div>
                   
+
+
+            <label htmlFor="mail" className="font-semibold">
+                   discount Price :{discountedPrice}
+            </label>
                 </div>
 
 </div>
@@ -558,3 +614,5 @@ const handleronCardnameChange=(e)=>{
   )
 
 }
+
+export default Payment; 
